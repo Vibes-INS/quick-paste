@@ -9,3 +9,7 @@
 .min-h-textarea {
     min-height: 3em;
 }
+
+.drag-none {
+    -webkit-user-drag: none;
+}
