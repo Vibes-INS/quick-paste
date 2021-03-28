@@ -1,5 +1,5 @@
 export function copy (content: string): void {
-  const input = document.createElement('input')
+  const input = document.createElement('textarea')
   input.value = content
   document.body.appendChild(input)
   input.select()
