@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+}
+
 .max-w-primary {
     max-width: 500px;
 }
@@ -14,7 +19,41 @@
     -webkit-user-drag: none;
 }
 
-*{
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-tap-highlight-color: transparent;
+.animation-show-up {
+    animation: animation-show-up 0.2s, animation-opacity 0.2s;
+}
+
+.animation-show-down {
+    animation: animation-show-down 0.2s, animation-opacity 0.2s;
+}
+
+.animation-opacity {
+    animation: animation-opacity 0.2s;
+}
+
+@keyframes animation-opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes animation-show-up {
+    0% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes animation-show-down {
+    0% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }

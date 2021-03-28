@@ -57,7 +57,7 @@ function App () {
     <div className="px-4 sm:px-6 lg:px-4 xl:px-6 pt-4 pb-10 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4 w-full m-auto max-w-primary">
       <Header onNewButton={() => onCreateNote()} folded={folded} setFolded={setFolded}/>
 
-      <form className="relative select-none">
+      <form className="relative select-none animation-show-down">
         <FontAwesomeIcon
           icon={faSearch}
           className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"

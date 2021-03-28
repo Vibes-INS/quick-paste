@@ -53,7 +53,7 @@ const NoteCard: React.FC<Props> = ({ note, onUpdateContent, onDelete, folded }) 
   const copyIcon = folded
     ? 'absolute right-0 top-0'
     : ''
-  return <div className={`${editingClassName} border rounded-md p-3 w-full relative pr-10 text-gray-700 dark:border-gray-700 dark:bg-black dark:text-gray-100`}>
+  return <div className={`${editingClassName} border rounded-md p-3 w-full relative pr-10 text-gray-700 dark:border-gray-700 dark:bg-black dark:text-gray-100 animation-show-up`}>
     {
       isEditing
         ? <textarea
