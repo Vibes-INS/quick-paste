@@ -30,6 +30,7 @@ const NoteCard: React.FC<Props> = ({ note, onUpdateContent, onDelete, folded }) 
     }
   }
   function onCopy () {
+    if (copying) return
     setCopying(true)
     copy(content)
     setTimeout(() => setCopying(false), 1000)
