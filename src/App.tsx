@@ -54,7 +54,7 @@ function App () {
   }, [])
 
   return (
-    <div className="px-4 sm:px-6 lg:px-4 xl:px-6 pt-4 pb-4 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4 w-full m-auto max-w-primary">
+    <div className="px-4 sm:px-6 lg:px-4 xl:px-6 pt-4 pb-10 sm:pb-6 lg:pb-4 xl:pb-6 space-y-4 w-full m-auto max-w-primary">
       <Header onNewButton={() => onCreateNote()} folded={folded} setFolded={setFolded}/>
 
       <form className="relative select-none">
@@ -63,7 +63,7 @@ function App () {
           className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
         />
         <input
-          className="focus:border-yellow-500 focus:bg-yellow-50 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-10"
+          className="bg-white dark:bg-black dark:text-gray-300 dark:border-gray-700 focus:border-yellow-500 focus:bg-opacity-5 focus:ring-1 focus:ring-yellow-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 rounded-md py-2 pl-10 appearance-none"
           type="text"
           placeholder="Filter by keyword"
           value={filterKeyWord}
