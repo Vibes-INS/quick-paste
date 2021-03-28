@@ -25,7 +25,6 @@ const NoteGroup: React.FC<Props> = ({
   return <ul className="grid grid-cols-1 gap-4 w-full">
     {
       notes
-        .reverse()
         .filter(note => !filterKeyWord || note.content.match(filterKeyWord || ''))
         .map(note => <li key={note.id}>
             <NoteCard
@@ -36,6 +35,7 @@ const NoteGroup: React.FC<Props> = ({
             />
           </li>
         )
+        .reverse()
     }
   </ul>
 }
