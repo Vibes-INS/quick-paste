@@ -1,0 +1,19 @@
+{
+    "envId": "quick-paste-2g4c8mm32b5d9149",
+    "version": "2.0",
+    "$schema": "https://framework-1258016615.tcloudbaseapp.com/schema/latest.json",
+    "functionRoot": "./functions",
+    "functions": [],
+    "region": "ap-guangzhou",
+    "framework": {
+        "name": "Qp",
+        "plugins": {
+            "website": {
+                "use": "@cloudbase/framework-plugin-website",
+                "inputs": {
+                    "outputPath": "./dist"
+                }
+            }
+        }
+    }
+}
