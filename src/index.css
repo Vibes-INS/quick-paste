@@ -5,3 +5,7 @@
 .max-w-primary {
     max-width: 500px;
 }
+
+.min-h-textarea {
+    min-height: 3em;
+}

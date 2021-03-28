@@ -7,9 +7,16 @@ export interface Props {
   onUpdateContent?: (id: string, content: string) => void
   onDelete?: (id: string) => void
   filterKeyWord?: string
+  folded?: boolean
 }
 
-const NoteGroup: React.FC<Props> = ({ notes, onUpdateContent, onDelete, filterKeyWord }) => {
+const NoteGroup: React.FC<Props> = ({
+  notes,
+  onUpdateContent,
+  onDelete,
+  filterKeyWord,
+  folded
+}) => {
   function onUpdateContentById (id: string, content: string) {
     if (!onUpdateContent) return
     onUpdateContent(id, content)
@@ -21,12 +28,13 @@ const NoteGroup: React.FC<Props> = ({ notes, onUpdateContent, onDelete, filterKe
         .reverse()
         .filter(note => !filterKeyWord || note.content.match(filterKeyWord || ''))
         .map(note => <li key={note.id}>
-          <NoteCard
-            note={note}
-            onUpdateContent={content => onUpdateContentById(note.id, content)}
-            onDelete={onDelete}
-          />
-        </li>
+            <NoteCard
+              note={note}
+              onUpdateContent={content => onUpdateContentById(note.id, content)}
+              onDelete={onDelete}
+              folded={folded}
+            />
+          </li>
         )
     }
   </ul>
