@@ -38,23 +38,28 @@ const NoteCard: React.FC<Props> = ({ note, onUpdateContent, onDelete }) => {
     await setEditing(true)
     textareaRef?.current?.focus()
   }
+  function getContentLineLength () {
+    return Math.max(content.split('\n').length, 2)
+  }
 
-  const contentLineLength = content.split('\n').length
-  return <div className="border border-gray-200 rounded-md p-3 w-full relative pr-10">
+  const editingClassName = editing
+    ? 'border-yellow-500 ring-1 ring-yellow-500'
+    : 'border-gray-200'
+  return <div className={`${editingClassName} border rounded-md p-3 w-full relative pr-10`}>
     {
       editing && onUpdateContent
         ? <div className="relative">
-          <textarea
-            className="w-full resize-x-none appearance-none outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 rounded-md focus:border-2 border px-3 py-2 text-gray-700"
-            value={content}
-            onChange={event => setContent(event.target.value)}
-            onKeyUp={onSaveByKeyUp}
-            ref={textareaRef}
-            onBlur={onSave}
-            rows={contentLineLength}
-          />
-          <FontAwesomeIcon icon={faSave} className={`${inlineIconClassName} bottom-4 right-4 absolute`} onClick={onSave}/>
-        </div>
+            <textarea
+              className="w-full resize-x-none appearance-none outline-none text-gray-700"
+              value={content}
+              onChange={event => setContent(event.target.value)}
+              onKeyUp={onSaveByKeyUp}
+              ref={textareaRef}
+              onBlur={onSave}
+              rows={getContentLineLength()}
+            />
+            <FontAwesomeIcon icon={faSave} className={`${inlineIconClassName} bottom-4 right-4 absolute`} onClick={onSave}/>
+          </div>
         : <span className="text-gray-700 break-all whitespace-pre-wrap">
             { content || 'New Note' }
             <FontAwesomeIcon icon={copying ? faCheck : faCopy} className={inlineIconClassName} onClick={onCopy}/>
