@@ -31,15 +31,25 @@ function App () {
     setNotes([...notes])
   }
 
+  async function onUpdateNoteSortValue (id: string) {
+    const note = notes.find(n => n.id === id)
+    if (!note) return
+    note.sortValue += 1
+    await noteStore.setItem<Note>(id, note)
+    setNotes([...notes])
+  }
+
   async function onCreateNote (content: string = '', tags: string[] = []) {
     const id = new ObjectID().toHexString()
     const newNote: Note = {
       id,
       content,
-      tags
+      tags,
+      sortValue: Math.min(...notes.map(note => note.sortValue)) - 1
     }
     await noteStore.setItem<Note>(id, newNote)
-    setNotes([...notes, newNote])
+    await setNotes([...notes, newNote])
+    window.scroll(0, document.body.scrollHeight)
   }
 
   async function onDelete (id: string) {
@@ -50,7 +60,9 @@ function App () {
   }
 
   useEffect(() => {
-    readNoteStoreAll().then(readNotes => setNotes(readNotes))
+    readNoteStoreAll().then(readNotes =>
+      setNotes(readNotes.map(note => ({ ...note, sortValue: Number(note.sortValue) })))
+    )
   }, [])
 
   return (
@@ -74,6 +86,7 @@ function App () {
       <NoteGroup
         notes={notes}
         onUpdateContent={onUpdateNoteContent}
+        onUpdateSortValue={onUpdateNoteSortValue}
         onDelete={onDelete}
         filterKeyWord={filterKeyWord}
         folded={folded}
