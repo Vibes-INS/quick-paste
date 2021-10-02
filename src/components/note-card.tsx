@@ -7,11 +7,18 @@ import { copy } from '../utils'
 interface Props {
   note: Note
   onUpdateContent?: (content: string) => void
+  onUpdateSortValue?: (id: string) => void
   onDelete?: (id: string) => void
   folded?: boolean
 }
 
-const NoteCard: React.FC<Props> = ({ note, onUpdateContent, onDelete, folded }) => {
+const NoteCard: React.FC<Props> = ({
+  note,
+  onUpdateContent,
+  onUpdateSortValue,
+  onDelete,
+  folded
+}) => {
   const [editing, setEditing] = useState(false)
   const [content, setContent] = useState(note.content)
   const [copying, setCopying] = useState(false)
@@ -33,6 +40,9 @@ const NoteCard: React.FC<Props> = ({ note, onUpdateContent, onDelete, folded }) 
     if (copying) return
     setCopying(true)
     copy(content)
+    if (onUpdateSortValue) {
+      onUpdateSortValue(note.id)
+    }
     setTimeout(() => setCopying(false), 1000)
   }
   async function onActiveEditing () {

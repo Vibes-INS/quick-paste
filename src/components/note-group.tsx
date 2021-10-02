@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Note } from '../interfaces/note.interface'
 import NoteCard from './note-card'
 
 export interface Props {
   notes: Note[]
   onUpdateContent?: (id: string, content: string) => void
+  onUpdateSortValue?: (id: string) => void
   onDelete?: (id: string) => void
   filterKeyWord?: string
   folded?: boolean
@@ -13,6 +14,7 @@ export interface Props {
 const NoteGroup: React.FC<Props> = ({
   notes,
   onUpdateContent,
+  onUpdateSortValue,
   onDelete,
   filterKeyWord,
   folded
@@ -22,21 +24,27 @@ const NoteGroup: React.FC<Props> = ({
     onUpdateContent(id, content)
   }
 
+  const noteElements = useMemo(() => {
+    return notes
+      .filter(note => !filterKeyWord || note.content.match(filterKeyWord || ''))
+      .sort((a, b) => a.sortValue - b.sortValue)
+      .map(note => (
+        <li key={note.id}>
+          <NoteCard
+            note={note}
+            onUpdateContent={content => onUpdateContentById(note.id, content)}
+            onUpdateSortValue={onUpdateSortValue}
+            onDelete={onDelete}
+            folded={folded}
+          />
+        </li>
+      )
+      )
+      .reverse()
+  }, [notes])
+
   return <ul className="grid grid-cols-1 gap-4 w-full">
-    {
-      notes
-        .filter(note => !filterKeyWord || note.content.match(filterKeyWord || ''))
-        .map(note => <li key={note.id}>
-            <NoteCard
-              note={note}
-              onUpdateContent={content => onUpdateContentById(note.id, content)}
-              onDelete={onDelete}
-              folded={folded}
-            />
-          </li>
-        )
-        .reverse()
-    }
+    {noteElements}
   </ul>
 }
 
